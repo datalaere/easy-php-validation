@@ -94,8 +94,8 @@ class Database
             }
 
             if ($this->query->execute()) {
-                $this->results = $this->query->fetchAll(PDO::FETCH_OBJ);
-                $this->count   = $this->query->rowCount();
+                    $this->results = $this->query->fetchAll(PDO::FETCH_OBJ);
+                    $this->count   = $this->query->rowCount();
             } else {
                 $this->error = true;
             }
@@ -186,7 +186,7 @@ class Database
 
         if (!$this->query($sql, $fields)->error())
         {
-            return true;
+            return $this->lastId();
         }
         return false;
     }
@@ -215,7 +215,7 @@ class Database
         return false;
     }
 
-    public function get($select = array(), $where = array(), $options = null)
+    public function select($select = array(), $where = array(), $options = null)
     {
         return $this->action('SELECT ' . implode($select, ', '), $where, $options);
     }
